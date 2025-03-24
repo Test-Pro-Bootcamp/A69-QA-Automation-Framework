@@ -11,7 +11,7 @@ import java.time.Duration;
 
 public class Homework16 {
     @Test
-    public void registrationNavigation() {
+    public void registrationNavigation() throws InterruptedException {
 
 //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
@@ -25,8 +25,10 @@ public class Homework16 {
         Assert.assertEquals(driver.getCurrentUrl(), url);
         WebElement registration = driver.findElement(By.xpath("//a[@href='registration']"));
         registration.click();
+        Thread.sleep(3000);
         WebElement registerHeading = driver.findElement(By.xpath("//h2[contains(text(), 'Register new account or')]"));
         Assert.assertTrue(registerHeading.isDisplayed());
+        Thread.sleep(3000);
         driver.quit();
     }
 }
