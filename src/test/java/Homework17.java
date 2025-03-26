@@ -12,7 +12,7 @@ public class Homework17 {
 
     public void addSongToPlaylist() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
+        options.addArguments("--remote-allow-origins=*");
         ChromeDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         String url = "https://qa.koel.app/";
