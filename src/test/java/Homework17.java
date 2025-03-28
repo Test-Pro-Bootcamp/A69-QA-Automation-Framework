@@ -24,8 +24,8 @@ public class Homework17 {
 
         WebElement provideEmail = driver.findElement(By.cssSelector("[type='email']"));
         provideEmail.sendKeys("artemisia.chalkiopoulou@testpro.io");
-        WebElement password = driver.findElement(By.cssSelector("[type='password']"));
-        password.sendKeys("22002255");
+        WebElement providePassword = driver.findElement(By.cssSelector("[type='password']"));
+        providePassword.sendKeys("22002255");
         WebElement login = driver.findElement(By.cssSelector("[type='submit']"));
         login.click();
         Thread.sleep(3000);
