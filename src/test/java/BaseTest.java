@@ -13,7 +13,8 @@ public class BaseTest {
     public String url = "https://qa.koel.app/";
 
     @BeforeMethod
-    public void launchBrowswer() {
+    @Parameters({"BaseURL"})
+    public void launchBrowswer(String BaseURL) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
