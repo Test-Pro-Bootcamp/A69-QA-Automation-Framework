@@ -6,13 +6,17 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest {
     @Test
     public void deletePlaylist() {
-       String delPlaylistMsgDisplay = "Deleted playlist \"My Songs 2 .\"";
+       String expectedMsg = "Deleted playlist \"My Songs 2.\"";
 
         login("artemisia.chalkiopoulou@testpro.io", "22002255");
 
-        Assert.assertTrue(delPlaylistMsg(), delPlaylistMsgDisplay);
+        openPlaylist();
+        clickDeletePlaylist();
+
+        Assert.assertTrue(isDeleteMessageDisplayed(expectedMsg), "Playlist was not deleted successfully.");
+
     }
-public void openplaylist(){
+public void openPlaylist(){
         WebElement emptyPlaylist = driver.findElement(By.cssSelector("li[class='playlist playlist']"));
         emptyPlaylist.click();
 }
@@ -22,9 +26,9 @@ public void clickDeletePlaylist() {
         deletePlaylistBtn.click();
 }
 
-public boolean delPlaylistMsg() {
+public boolean isDeleteMessageDisplayed(String expectedMsg) {
         WebElement deleteMsg = driver.findElement(By.xpath("//div[@class='success show']"));
-    return true;
+    return deleteMsg.getText().equals(expectedMsg);
 }
 
 }

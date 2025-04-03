@@ -14,14 +14,14 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowswer(String BaseURL) {
+    public void launchBrowser(String BaseURL) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get(url);
+        driver.get(BaseURL);
     }
 
     public void provideEmail(String email) {
