@@ -4,13 +4,15 @@
 <!--  This is how to comment out in the xml  -->
 <suite name="TestNG">
     <parameter name="BaseURL" value ="https://qa.koel.app/"/>
-    <test name="Example Test" preserve-order="false">
+    <test name="Test" preserve-order="true">
         <classes>
-            <class name="LoginTests"/>
-            <class name="BaseTest"/>
-            <class name="RegistrationTests"/>
-            <class name="ProfileTests"/>
-            <class name="PlaylistTests"/>
+            <class name="PlaylistTests">
+                <!-- <methods>
+                    <include name="deletePlaylist"/>
+                   </methods>
+                -->
+            </class>
+
         </classes>
     </test>
 </suite>
