@@ -1,34 +1,46 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest {
     @Test
-    public void deletePlaylist() {
-       String expectedMsg = "Deleted playlist \"My Songs 2.\"";
+    public void deletePlaylist() throws InterruptedException {
+       String expectedMsg = "Deleted playlist \"My Car Playlist.\"";
 
         login("artemisia.chalkiopoulou@testpro.io", "22002255");
 
-        openPlaylist();
+        createPlaylist();
         clickDeletePlaylist();
 
         Assert.assertTrue(isDeleteMessageDisplayed(expectedMsg), "Playlist was not deleted successfully.");
-
     }
-public void openPlaylist(){
-        WebElement emptyPlaylist = driver.findElement(By.cssSelector("li[class='playlist playlist']"));
-        emptyPlaylist.click();
-}
 
-public void clickDeletePlaylist() {
+   public void createPlaylist() throws InterruptedException {
+        WebElement createPlaylistBtn = driver.findElement(By.cssSelector("[data-testid='sidebar-create-playlist-btn']"));
+        Thread.sleep(3000);
+        createPlaylistBtn.click();
+
+        WebElement newPlaylistBtn = driver.findElement(By.cssSelector("li[data-testid='playlist-context-menu-create-simple']"));
+       Thread.sleep(3000);
+        newPlaylistBtn.click();
+
+        WebElement playlistName = driver.findElement(By.xpath("//input[@placeholder='↵ to save']"));
+       Thread.sleep(5000);
+        playlistName.sendKeys("My Car Playlist" + "\n");
+   }
+
+    public void clickDeletePlaylist() throws InterruptedException {
         WebElement deletePlaylistBtn = driver.findElement(By.cssSelector("button[title='Delete this playlist']"));
+        Thread.sleep(3000);
         deletePlaylistBtn.click();
-}
+    }
 
-public boolean isDeleteMessageDisplayed(String expectedMsg) {
+    public boolean isDeleteMessageDisplayed(String expectedMsg) throws InterruptedException {
         WebElement deleteMsg = driver.findElement(By.xpath("//div[@class='success show']"));
-    return deleteMsg.getText().equals(expectedMsg);
-}
+        Thread.sleep(5000);
+        return deleteMsg.getText().equals(expectedMsg);
+    }
 
 }
