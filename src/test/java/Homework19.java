@@ -20,15 +20,15 @@ public class Homework19 extends BaseTest {
 
    public void createPlaylist() throws InterruptedException {
         WebElement createPlaylistBtn = driver.findElement(By.cssSelector("[data-testid='sidebar-create-playlist-btn']"));
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         createPlaylistBtn.click();
 
         WebElement newPlaylistBtn = driver.findElement(By.cssSelector("li[data-testid='playlist-context-menu-create-simple']"));
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         newPlaylistBtn.click();
 
         WebElement playlistName = driver.findElement(By.xpath("//input[@placeholder='↵ to save']"));
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         playlistName.sendKeys("My Car Playlist" + "\n");
    }
 
