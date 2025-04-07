@@ -20,5 +20,20 @@ public class ContextClickTest extends BaseTest{
         Assert.assertTrue(songsPage.isSongPlaying());
     }
 
+@Test
+    public void clickHomePageLinksTests(){
+    LoginPage loginPage = new LoginPage(driver);
+    LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
 
+    loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
+
+    leftNavPanelPage.clickFavoritesLink();
+    leftNavPanelPage.clickCurrentQueueLink();
+    leftNavPanelPage.clickHomeLink();
+    leftNavPanelPage.clickAlbumsLink();
+    leftNavPanelPage.chooseAllSongsList();
+    leftNavPanelPage.clickArtistsLink();
+    leftNavPanelPage.clickRecentlyPlayedLink();
+
+}
 }

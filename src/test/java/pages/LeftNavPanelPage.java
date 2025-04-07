@@ -15,7 +15,7 @@ public class LeftNavPanelPage extends BasePage{
     }
 
 //Locators
-    By homeLink = By.xpath("//a[@class='home active']");
+    By homeLink = By.xpath("//a[@class='home']");
     By currentQueueLink = By.xpath("//a[@class='queue']");
     By allSongsLink = By.xpath("//a[@class='songs']");
     By albumsLink = By.xpath("//a[@class='albums']");
@@ -27,7 +27,6 @@ public class LeftNavPanelPage extends BasePage{
     By playlistNameField = By.xpath("//form[@class='create']//input");
     By searchField = By.cssSelector("[type='search']");
     By playlistElement = By.cssSelector(".playlist:nth-child(5)");
-   // By playlistInputField = By.xpath("//input[@name='name']");
     By playlistInputField = By.cssSelector("[name='name']");
 //Methods
 
@@ -97,6 +96,30 @@ public class LeftNavPanelPage extends BasePage{
         findElement(playlistInputField).sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
         findElement(playlistInputField).sendKeys(newPlaylistName);
         findElement(playlistInputField).sendKeys(Keys.ENTER);
+    }
+
+    public void clickHomeLink(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(homeLink)).click();
+    }
+
+    public void clickCurrentQueueLink(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(currentQueueLink)).click();
+    }
+
+    public void clickAlbumsLink(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(albumsLink)).click();
+    }
+
+    public void clickArtistsLink(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(artistsLink)).click();
+    }
+
+    public void clickFavoritesLink(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(favoritesLink)).click();
+    }
+
+    public void clickRecentlyPlayedLink(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(recentlyPlayedLink)).click();
     }
 
 }

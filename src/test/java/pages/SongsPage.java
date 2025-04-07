@@ -27,6 +27,7 @@ import java.util.List;
     By deleteButton = By.xpath("//button[@class='del btn-delete-playlist']");
     By okButton = By.xpath("//button[@class='ok']");
     By songListElement = By.cssSelector("section#playlistWrapper td.title");
+    By playlistDetails = By.cssSelector("span.meta.text-secondary span.meta");
 
 //Methods
 
@@ -107,7 +108,7 @@ import java.util.List;
     }
 
     public String getPlaylistDetails() {
-        return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
+        return driver.findElement(playlistDetails).getText();
     }
 
     public int countSongs() {
