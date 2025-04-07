@@ -116,7 +116,7 @@ public class PlaylistTests extends BaseTest{
     public String newPlaylistName = "Test Edited Playlist2";
 
     @Test
-    public void renamePlaylist() throws InterruptedException {
+    public void renamePlaylist()  {
         String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist2.\"";
 
         LoginPage loginPage = new LoginPage(driver);
@@ -127,9 +127,7 @@ public class PlaylistTests extends BaseTest{
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
 
         leftNavPanelPage.doubleClickPlaylist();
-        Thread.sleep(10000);
         leftNavPanelPage.enterNewPlaylistName(newPlaylistName);
-        Thread.sleep(10000);
         Assert.assertEquals(homePage.getTextFromAlert(), updatedPlaylistMsg);
     }
 
