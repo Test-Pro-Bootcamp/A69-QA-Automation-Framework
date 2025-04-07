@@ -1,28 +1,23 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
-import pages.SongsPage;
 
-public class SongTests extends BaseTest{
+public class HoverTests extends BaseTest{
 
     @Test
-    public void playSong() throws InterruptedException {
+    public void hoverOverPlayButton(){
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
+
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
 
-        homePage.playNextSong();
-        homePage.clickPlaySong();
-
-        //Expected results
-        //The pause button is displayed to confirm that the song is playing
-
-        Assert.assertTrue(homePage.isPauseBtnDisplayed());
-
+        //Expected Results  after hovering over play button is visible
+        Assert.assertTrue(homePage.isHoverOverPlayBtnDisplayed());
     }
 
 }

@@ -1,8 +1,6 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.*;
 
 public class PlaylistTests extends BaseTest{
     public String playlistName = "mkl";
@@ -13,87 +11,101 @@ public class PlaylistTests extends BaseTest{
     @Test
     public void deletePlaylist() throws InterruptedException {
         String expectedAlert = "Deleted playlist \"" + playlistName + ".\"";
-        //Steps
-        //navigateToPage();   moved to Base class
-        provideEmail("oksana.chaklosh@testpro.io");
-        providePassword("8qUBYosp");
-        clickSubmit();
 
-        boolean exists = selectPlaylist(playlistName);
+        LoginPage loginPage = new LoginPage(driver);
+        PlaylistsPage playlistsPage = new PlaylistsPage(driver);
+        HomePage homePage = new HomePage(driver);
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
+
+        //Steps
+        loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
+
+        boolean exists = leftNavPanelPage.selectPlaylistSideMenu(playlistName);
         if (!exists){
             alreadyLoggedIn = true;
             createPlaylist();
         }
         else {
-            boolean empty = checkIfPlaylistEmpty();
-            removePlaylist();
+            boolean empty = playlistsPage.checkIfPlaylistEmpty();
+            playlistsPage.removePlaylist();
             if(!empty) {
-                confirmDelete();    //SOMETIMES NEEDS TO BE DISABLED WHEN Confirmation Box does not appear
+                playlistsPage.confirmDelete();    //SOMETIMES NEEDS TO BE DISABLED WHEN Confirmation Box does not appear
             }
-            WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='alertify-logs top right']")));
-            Assert.assertEquals(alert.getText(),expectedAlert);
+            //WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='alertify-logs top right']")));
+            Assert.assertEquals(homePage.getTextFromAlert(),expectedAlert);
         }
 
     }
 
+    //Creating a playlist using plus sign on left panel
     @Test
     public void createPlaylist() throws InterruptedException {
         String expectedAlert = "Created playlist \"" + playlistName + ".\"";
+
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
+        HomePage homePage = new HomePage(driver);
         //Steps
         if(!alreadyLoggedIn){
-            //navigateToPage();   moved to Base class
-            provideEmail("oksana.chaklosh@testpro.io");
-            providePassword("8qUBYosp");
-            clickSubmit();
+            LoginPage loginPage = new LoginPage(driver);
+            //Steps
+            loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
         }
 
-        boolean exists = selectPlaylist(playlistName);
+        boolean exists = leftNavPanelPage.selectPlaylistSideMenu(playlistName);
         if (!exists){
-            clickAddPlaylistButton();
-            clickNewPlaylist();
-            inputPlaylistName(playlistName);
+            leftNavPanelPage.clickAddPlaylistButtonPlusSign();
+            leftNavPanelPage.clickNewPlaylist();
+            leftNavPanelPage.inputPlaylistName(playlistName);
 
-            WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='alertify-logs top right']")));
-            Assert.assertEquals(alert.getText(),expectedAlert);
+            //WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='alertify-logs top right']")));
+            Assert.assertEquals(homePage.getTextFromAlert(),expectedAlert);
             
         }
     }
 
+    //Searching for song through search on left panel; then choosing the first song from the list to add
+    //either to existing playlist or new playlist
     @Test
     public void addSongToPlaylist() throws InterruptedException {
         String expectedAlert = "Added 1 song into \"" + playlistName + ".\"";
+
+        LoginPage loginPage = new LoginPage(driver);
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
+        SongsPage songsPage = new SongsPage(driver);
+        HomePage homePage = new HomePage(driver);
+
         //Steps
-        //navigateToPage();   moved to Base class
-        provideEmail("oksana.chaklosh@testpro.io");
-        providePassword("8qUBYosp");
-        clickSubmit();
+        loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
         
-        searchSong("Dee");
-        viewSearchResults();
-        chooseFirstSong();
-        clickAddToButton();
-        boolean exists = choosePlaylistToAddSongTo(playlistName);
+        leftNavPanelPage.searchSong("Dee");
+        songsPage.viewSearchResults();
+        songsPage.chooseFirstSong();
+        songsPage.clickAddToButton();
+        boolean exists = songsPage.choosePlaylistToAddSongTo(playlistName);
         if (exists){
-            WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='alertify-logs top right']")));
-            Assert.assertEquals(alert.getText(),expectedAlert);
+            Assert.assertEquals(homePage.getTextFromAlert(),expectedAlert);
         }
           // option to choose new playlist instead of existing one
         else {
-            addNewPlaylist(playlistName);
+            songsPage.addNewPlaylist(playlistName);
         }
 
     }
 
     @Test
     public void countSongsInPlaylist() throws InterruptedException {
-        provideEmail("oksana.chaklosh@testpro.io");
-        providePassword("8qUBYosp");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
+        SongsPage songsPage = new SongsPage(driver);
+        PlaylistsPage playlistsPage = new PlaylistsPage(driver);
 
-        boolean exists = selectPlaylist("abc");
+        //Steps
+        loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
+
+        boolean exists = leftNavPanelPage.selectPlaylistSideMenu("dfg");
         if (exists){
-            displayAllSongs();
-            Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongs())));
+            playlistsPage.displayAllSongsToConsole();
+            Assert.assertTrue(playlistsPage.getPlaylistDetails().contains(String.valueOf(playlistsPage.countSongs())));
         }
         else {
             alreadyLoggedIn = true;
@@ -101,19 +113,24 @@ public class PlaylistTests extends BaseTest{
         }
     }
 
-    public String newPlaylistName = "Test Edited Playlist";
+    public String newPlaylistName = "Test Edited Playlist2";
 
     @Test
-    public void renamePlaylist(){
-        String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist.\"";
+    public void renamePlaylist() throws InterruptedException {
+        String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist2.\"";
 
-        provideEmail("oksana.chaklosh@testpro.io");
-        providePassword("8qUBYosp");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-        doubleClickPlaylist();
-        enterNewPlaylistName(newPlaylistName);
-        Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
+        //Steps
+        loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
+
+        leftNavPanelPage.doubleClickPlaylist();
+        Thread.sleep(10000);
+        leftNavPanelPage.enterNewPlaylistName(newPlaylistName);
+        Thread.sleep(10000);
+        Assert.assertEquals(homePage.getTextFromAlert(), updatedPlaylistMsg);
     }
 
 }
