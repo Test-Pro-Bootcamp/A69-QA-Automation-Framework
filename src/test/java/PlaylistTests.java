@@ -13,7 +13,7 @@ public class PlaylistTests extends BaseTest{
         String expectedAlert = "Deleted playlist \"" + playlistName + ".\"";
 
         LoginPage loginPage = new LoginPage(driver);
-        PlaylistsPage playlistsPage = new PlaylistsPage(driver);
+        SongsPage songsPage = new SongsPage(driver);
         HomePage homePage = new HomePage(driver);
         LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
 
@@ -26,10 +26,10 @@ public class PlaylistTests extends BaseTest{
             createPlaylist();
         }
         else {
-            boolean empty = playlistsPage.checkIfPlaylistEmpty();
-            playlistsPage.removePlaylist();
+            boolean empty = songsPage.checkIfPlaylistEmpty();
+            songsPage.removePlaylist();
             if(!empty) {
-                playlistsPage.confirmDelete();    //SOMETIMES NEEDS TO BE DISABLED WHEN Confirmation Box does not appear
+                songsPage.confirmDelete();    //SOMETIMES NEEDS TO BE DISABLED WHEN Confirmation Box does not appear
             }
             //WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='alertify-logs top right']")));
             Assert.assertEquals(homePage.getTextFromAlert(),expectedAlert);
@@ -97,15 +97,14 @@ public class PlaylistTests extends BaseTest{
         LoginPage loginPage = new LoginPage(driver);
         LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
         SongsPage songsPage = new SongsPage(driver);
-        PlaylistsPage playlistsPage = new PlaylistsPage(driver);
 
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
 
         boolean exists = leftNavPanelPage.selectPlaylistSideMenu("dfg");
         if (exists){
-            playlistsPage.displayAllSongsToConsole();
-            Assert.assertTrue(playlistsPage.getPlaylistDetails().contains(String.valueOf(playlistsPage.countSongs())));
+            songsPage.displayAllSongsToConsole();
+            Assert.assertTrue(songsPage.getPlaylistDetails().contains(String.valueOf(songsPage.countSongs())));
         }
         else {
             alreadyLoggedIn = true;
@@ -113,11 +112,11 @@ public class PlaylistTests extends BaseTest{
         }
     }
 
-    public String newPlaylistName = "Test Edited Playlist2";
+    public String newPlaylistName = "Test Edited Playlist3";
 
     @Test
     public void renamePlaylist()  {
-        String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist2.\"";
+        String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist3.\"";
 
         LoginPage loginPage = new LoginPage(driver);
         LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);

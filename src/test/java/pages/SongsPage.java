@@ -23,6 +23,10 @@ import java.util.List;
     By addToButton = By.cssSelector("[class='btn-add-to']");
     By playlistNameField = By.xpath("//section[@id='songResultsWrapper']//input");
     By submitButton = By.xpath("//section[@id='songResultsWrapper']//button[@type='submit']");
+    By meta = By.xpath("//span[@class='meta']");
+    By deleteButton = By.xpath("//button[@class='del btn-delete-playlist']");
+    By okButton = By.xpath("//button[@class='ok']");
+    By songListElement = By.cssSelector("section#playlistWrapper td.title");
 
 //Methods
 
@@ -74,6 +78,41 @@ import java.util.List;
         wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
     }
 
+    public boolean checkIfPlaylistEmpty() {
+        boolean empty = false;
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(meta));
 
+        } catch (Exception e) {
+            empty = true;
+        }
+        return empty;
+    }
 
+    public void removePlaylist() {
+        wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
+    }
+
+    //Needed ONLY if Playlist is not Empty
+    public void confirmDelete() {
+        wait.until(ExpectedConditions.elementToBeClickable(okButton)).click();
+    }
+
+    public void displayAllSongsToConsole() {
+        List<WebElement> songList = driver.findElements(songListElement);
+        System.out.println("number of songs found:" + countSongs());
+        for (WebElement e : songList) {
+            System.out.println(e.getText());
+        }
+    }
+
+    public String getPlaylistDetails() {
+        return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
+    }
+
+    public int countSongs() {
+        return driver.findElements(songListElement).size();
+    }
 }
+
+

@@ -27,8 +27,8 @@ public class LeftNavPanelPage extends BasePage{
     By playlistNameField = By.xpath("//form[@class='create']//input");
     By searchField = By.cssSelector("[type='search']");
     By playlistElement = By.cssSelector(".playlist:nth-child(5)");
-    By playlistInputField = By.xpath("//input[@name='name']");
-
+   // By playlistInputField = By.xpath("//input[@name='name']");
+    By playlistInputField = By.cssSelector("[name='name']");
 //Methods
 
     // Checks if playlist exists, if yes Selects Playlist by name from the LEFT SIDE MENU
@@ -91,12 +91,11 @@ public class LeftNavPanelPage extends BasePage{
         return notification.getText();
     }
 
-    public void enterNewPlaylistName(String newPlaylistName) throws InterruptedException {
-        wait.until(ExpectedConditions.presenceOfElementLocated(playlistInputField));
+    public void enterNewPlaylistName(String newPlaylistName) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(playlistInputField));
         //clear() doesn't work, element has an attribute of 'required'; we are using ctrl + A to select all then backspace
         findElement(playlistInputField).sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
-        Thread.sleep(5000);
-        findElement(playlistNameField).sendKeys(newPlaylistName);
+        findElement(playlistInputField).sendKeys(newPlaylistName);
         findElement(playlistInputField).sendKeys(Keys.ENTER);
     }
 

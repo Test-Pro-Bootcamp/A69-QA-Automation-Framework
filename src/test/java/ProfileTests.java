@@ -1,28 +1,26 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
-import pages.ProfilePage;
+import pages.UserProfilePage;
 
 public class ProfileTests extends BaseTest{
     @Test
     public void changeProfileName() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
-        ProfilePage profilePage = new ProfilePage(driver);
+        UserProfilePage userProfilePage = new UserProfilePage(driver);
         HomePage homePage = new HomePage(driver);
 
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
 
-        profilePage.clickAvatar();
-        profilePage.provideCurrentPassword("8qUBYosp");
+        userProfilePage.clickAvatar();
+        userProfilePage.provideCurrentPassword("8qUBYosp");
         String randomName = generateRandomName();
-        profilePage.provideName(randomName);
+        userProfilePage.provideName(randomName);
         loginPage.provideEmail("oksana.chaklosh@testpro.io");
-        profilePage.provideNewPassword("A1234512345");
-        profilePage.clickSave();
+        userProfilePage.provideNewPassword("A1234512345");
+        userProfilePage.clickSave();
 
         //Expected Result
         // This Assert is to check if there alert is visible after Save button is clicked

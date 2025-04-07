@@ -71,29 +71,6 @@ public class BaseTest {
     }
 
 
-
-
-
-
-
-    public void doubleClickPlaylist() {
-        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(5)")));
-        actions.doubleClick(playlistElement).perform();
-    }
-
-    public String getRenamePlaylistSuccessMsg() {
-        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        return notification.getText();
-    }
-
-    public void enterNewPlaylistName(String newPlaylistName) {
-        WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
-        //clear() doesn't work, element has an attribute of 'required'; we are using ctrl + A to select all then backspace
-        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
-        playlistInputField.sendKeys(newPlaylistName);
-        playlistInputField.sendKeys(Keys.ENTER);
-    }
-
     /*// RANDOM GENERATORS
     public String generateRandomPlaylistName(){
         Faker faker = new Faker (new Locale("en-US"));

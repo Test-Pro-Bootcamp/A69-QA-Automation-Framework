@@ -2,12 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ProfilePage extends BasePage{
+public class UserProfilePage extends BasePage{
 //Constructor
-    public ProfilePage(WebDriver givenDriver) {
+    public UserProfilePage(WebDriver givenDriver) {
         super(givenDriver);
     }
 //Locators
