@@ -13,6 +13,7 @@ import org.testng.annotations.*;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class BaseTest {
@@ -71,14 +72,14 @@ public class BaseTest {
     }
 
 
-    /*// RANDOM GENERATORS
+    /*/ RANDOM GENERATORS
     public String generateRandomPlaylistName(){
         Faker faker = new Faker (new Locale("en-US"));
         String newName = faker.address().country();
         return newName;
     }
 
-    public String generateRandomName(){
+    public String generateRandomNameOtherWay(){
         Faker faker = new Faker (new Locale("en-US"));
         String newName = faker.name().firstName;
         return newName;

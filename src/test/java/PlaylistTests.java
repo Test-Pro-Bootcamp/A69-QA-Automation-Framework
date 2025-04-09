@@ -3,12 +3,12 @@ import org.testng.annotations.Test;
 import pages.*;
 
 public class PlaylistTests extends BaseTest{
-    public String playlistName = "mkl";
+    public String playlistName = "ty";
     public boolean alreadyLoggedIn = false; // user not logged in
     // if createPlaylist was called from addSong, needs to rerun addSong
     public boolean addSong = false;
 
-    @Test
+    @Test (priority = 3)
     public void deletePlaylist() throws InterruptedException {
         String expectedAlert = "Deleted playlist \"" + playlistName + ".\"";
 
@@ -38,7 +38,7 @@ public class PlaylistTests extends BaseTest{
     }
 
     //Creating a playlist using plus sign on left panel
-    @Test
+    @Test (priority = 1)
     public void createPlaylist() throws InterruptedException {
         String expectedAlert = "Created playlist \"" + playlistName + ".\"";
 
@@ -65,7 +65,7 @@ public class PlaylistTests extends BaseTest{
 
     //Searching for song through search on left panel; then choosing the first song from the list to add
     //either to existing playlist or new playlist
-    @Test
+    @Test (priority = 2)
     public void addSongToPlaylist() throws InterruptedException {
         String expectedAlert = "Added 1 song into \"" + playlistName + ".\"";
 
@@ -79,15 +79,17 @@ public class PlaylistTests extends BaseTest{
         
         leftNavPanelPage.searchSong("Dee");
         songsPage.viewSearchResults();
-        songsPage.chooseFirstSong();
+        songsPage.clickFirstSong();
         songsPage.clickAddToButton();
-        boolean exists = songsPage.choosePlaylistToAddSongTo(playlistName);
+        boolean exists = songsPage.clickExistingPlaylistToAddSongTo(playlistName);
         if (exists){
             Assert.assertEquals(homePage.getTextFromAlert(),expectedAlert);
         }
           // option to choose new playlist instead of existing one
         else {
             songsPage.addNewPlaylist(playlistName);
+            expectedAlert = "Created playlist \"" + playlistName + ".\"";
+            Assert.assertEquals(homePage.getTextFromAlert(),expectedAlert);
         }
 
     }
@@ -112,11 +114,11 @@ public class PlaylistTests extends BaseTest{
         }
     }
 
-    public String newPlaylistName = "Test Edited Playlist3";
+    public String newPlaylistName = "Test Edited Playlist2";
 
     @Test
     public void renamePlaylist()  {
-        String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist3.\"";
+        String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist2.\"";
 
         LoginPage loginPage = new LoginPage(driver);
         LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);

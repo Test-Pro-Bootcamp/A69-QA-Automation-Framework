@@ -2,6 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class UserProfilePage extends BasePage{
@@ -10,12 +12,20 @@ public class UserProfilePage extends BasePage{
         super(givenDriver);
     }
 //Locators
-    By avatarIcon = By.xpath("//a[@class='view-profile']");
-    By currentPasswordField = By.cssSelector("input[id='inputProfileCurrentPassword']");
-    By nameField = By.cssSelector("input[id='inputProfileName']");
-    By newPasswordField = By.cssSelector("input[id='inputProfileNewPassword']");
-    By saveButton = By.cssSelector("[class='btn-submit']");
-    By actualProfileName = By.cssSelector("a.view-profile>span");
+                    //Old way
+    private By avatarIcon = By.xpath("//a[@class='view-profile']");
+    //By currentPasswordField = By.cssSelector("input[id='inputProfileCurrentPassword']");
+    //By nameField = By.cssSelector("input[id='inputProfileName']");
+    //By newPasswordField = By.cssSelector("input[id='inputProfileNewPassword']");
+    //By saveButton = By.cssSelector("[class='btn-submit']");
+    //By actualProfileName = By.cssSelector("a.view-profile>span");
+                    //New way with page factory
+    //@FindBy (xpath = "//a[@class='view-profile']") WebElement avatarIcon;
+    @FindBy (css = "input[id='inputProfileCurrentPassword']") private WebElement currentPasswordField;
+    @FindBy (css = "input[id='inputProfileName']") private WebElement nameField;
+    @FindBy (css = "input[id='inputProfileNewPassword']") private WebElement newPasswordField;
+    @FindBy (css = "[class='btn-submit']") private WebElement saveButton;
+    @FindBy (css = "a.view-profile>span") private WebElement actualProfileName;
 
 //Methods
     public void clickAvatar() {
@@ -25,29 +35,29 @@ public class UserProfilePage extends BasePage{
 
     public void provideCurrentPassword(String currentPassword) {
         wait.until(ExpectedConditions.elementToBeClickable(currentPasswordField));
-        findElement(currentPasswordField).clear();
-        findElement(currentPasswordField).sendKeys(currentPassword);
+        currentPasswordField.clear();
+        currentPasswordField.sendKeys(currentPassword);
     }
 
     public void provideName(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(nameField));
-        findElement(nameField).clear();
-        findElement(nameField).sendKeys(name);
+        nameField.clear();
+        nameField.sendKeys(name);
     }
 
     public void provideNewPassword(String password) {
         wait.until(ExpectedConditions.elementToBeClickable(newPasswordField));
-        findElement(newPasswordField).clear();
-        findElement(newPasswordField).sendKeys(password);
+        newPasswordField.clear();
+        newPasswordField.sendKeys(password);
     }
 
     public void clickSave() {
         wait.until(ExpectedConditions.elementToBeClickable(saveButton));
-        findElement(saveButton).click();
+        saveButton.click();
     }
 
     //actualProfileName.getText()
     public String actualProfileName(){
-        return findElement(actualProfileName).getText();
+        return actualProfileName.getText();
     }
 }

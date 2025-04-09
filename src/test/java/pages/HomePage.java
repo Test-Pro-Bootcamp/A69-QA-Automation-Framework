@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -12,16 +13,21 @@ public class HomePage extends BasePage{
         super(givenDriver);
     }
 //Locators
-    By avatarIcon = By.cssSelector("img[class='avatar']");  // profile avatar
-    By alert = By.cssSelector("[class='alertify-logs top right']"); // alert message box top right
-    By playBtn = By.xpath("//span[@data-testid='play-btn']");
-    By nextSongButton = By.xpath("//i[@data-testid='play-next-btn']");
-    By playButton = By.xpath("//span[@data-testid='play-btn']");
-    By pauseButton = By.xpath("//span[@class='pause']");
-
+                    //Old way
+    //By avatarIcon = By.cssSelector("img[class='avatar']");  // profile avatar
+    private By alert = By.cssSelector("[class='alertify-logs top right']"); // alert message box top right
+    private By playBtn = By.xpath("//span[@data-testid='play-btn']");
+    private By nextSongButton = By.xpath("//i[@data-testid='play-next-btn']");
+    //By pauseButton = By.xpath("//span[@class='pause']");
+                    //New way with page factory
+    @FindBy (css = "img[class='avatar']") private WebElement avatarIcon;
+   // @FindBy (css = "[class='alertify-logs top right']") WebElement alert;
+    //@FindBy (xpath = "//span[@data-testid='play-btn']") WebElement playBtn;
+    //@FindBy (xpath = "//i[@data-testid='play-next-btn']") WebElement nextSongButton;
+    @FindBy (xpath = "//span[@class='pause']") private WebElement pauseButton;
 //Methods
     public boolean isAvatarIconDisplayed(){
-        return findElement(avatarIcon).isDisplayed();
+        return avatarIcon.isDisplayed();
     }
 
     public boolean isAlertDisplayed(){
@@ -34,7 +40,6 @@ public class HomePage extends BasePage{
 
     public WebElement hoverPlay() {
         WebElement play = wait.until(ExpectedConditions.elementToBeClickable(playBtn));
-
         actions.moveToElement(play).perform();
         return wait.until(ExpectedConditions.visibilityOf(play));
     }
@@ -54,7 +59,7 @@ public class HomePage extends BasePage{
     }
 
     public boolean isPauseBtnDisplayed(){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(pauseButton)).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOf(pauseButton)).isDisplayed();
     }
 
 
