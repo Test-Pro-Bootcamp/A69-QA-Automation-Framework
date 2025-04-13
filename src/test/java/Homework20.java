@@ -1,45 +1,48 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+import java.time.Instant;
 
 public class Homework20 extends BaseTest {
-    private WebDriverWait wait;
-
     @Test
-    public void deletePlaylist() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        String expectedMsg = "Deleted playlist \"My Songs 2.\"";
+    public void deletePlaylist() throws InterruptedException {
+        String expectedMsg = "Deleted playlist \"My Car Playlist\"";
 
         login("artemisia.chalkiopoulou@testpro.io", "22002255");
 
-        openPlaylist();
+        createPlaylist();
         clickDeletePlaylist();
 
         Assert.assertTrue(isDeleteMessageDisplayed(expectedMsg), "Playlist was not deleted successfully.");
     }
-    public void openPlaylist(){
-        WebElement playlist = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("li[class='playlist playlist']")));
-        playlist.click();
+
+    public void createPlaylist() {
+        WebElement createPlaylistBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("[data-testid='sidebar-create-playlist-btn']")));
+        createPlaylistBtn.click();
+
+        WebElement newPlaylistBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("li[data-testid='playlist-context-menu-create-simple']")));
+        newPlaylistBtn.click();
+
+        WebElement playlistNameInput = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//input[@placeholder='↵ to save']")));
+        playlistNameInput.sendKeys("My Car Playlist\n");
     }
 
-    public void clickDeletePlaylist() {
-        WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+    public void clickDeletePlaylist() throws InterruptedException {
+        WebElement deletePlaylistBtn = wait.until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector("button[title='Delete this playlist']")));
-        deleteButton.click();
+        deletePlaylistBtn.click();
     }
 
-    public boolean isDeleteMessageDisplayed(String expectedText) {
-        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(
+    public boolean isDeleteMessageDisplayed(String expectedMsg) {
+        WebElement deleteMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//div[@class='success show']")));
-        return message.getText().equals(expectedText);
+        return deleteMsg.getText().equals(expectedMsg);
     }
 
 }
