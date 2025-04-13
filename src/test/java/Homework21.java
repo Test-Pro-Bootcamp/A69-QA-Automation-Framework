@@ -37,9 +37,8 @@ public class Homework21 extends BaseTest {
     }
 
     public void renamePlaylistWithActions() {
-        WebElement playlistElement = driver.findElement(By.xpath("//a[normalize-space()='New Playlist']"));
+        WebElement playlistElement = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a"));
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions.moveToElement(playlistElement).contextClick().perform();
         actions.moveToElement(playlistElement).doubleClick().perform();
         playlistElement.sendKeys("My Study Playlist" + Keys.ENTER);
     }
