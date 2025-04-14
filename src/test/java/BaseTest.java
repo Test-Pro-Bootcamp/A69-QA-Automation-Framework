@@ -44,21 +44,22 @@ public class BaseTest {
     }
 
     public void providePassword(String pass) {
-        WebElement password = driver.findElement(By.cssSelector("input[type='password']"));
-        password.clear();
-        password.sendKeys(pass);
+        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        passwordField.clear();
+        passwordField.sendKeys(pass);
     }
 
-    public void clickSubmit() {
-        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
-        submit.click();
+    public void clickLoginBtn() {
+        WebElement clickSubmit = driver.findElement(By.cssSelector("button[type='submit']"));
+        clickSubmit.click();
     }
 
     public void login(String email, String password) {
         provideEmail(email);
         providePassword(password);
-        clickSubmit();
+        clickLoginBtn();
     }
+
     public void waitForPlaylistWithName(String name) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//li[contains(@class,'playlist')]//span[text()='" + name + "']")));
