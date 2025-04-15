@@ -13,7 +13,9 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginSuccessTest() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("artemisia.chalkiopoulou@testpro.io", "22002255");
+        loginPage.provideEmail ("artemisia.chalkiopoulou@testpro.io")
+                .providePassword("22002255")
+                .clickLoginBtn();
 
         WebElement avatar = driver.findElement(By.cssSelector(".avatar"));
         Assert.assertTrue(avatar.isDisplayed());

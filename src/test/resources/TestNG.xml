@@ -8,11 +8,11 @@
         <classes>
             <class name="BaseTest"/>
             <class name="LoginTests"/>
-            <class name="Homework17"/>
-            <class name="Homework18"/>
-            <class name="Homework19"/>
+            <class name="HW17AddSongToPlaylist"/>
+            <class name="HW18PlaySong"/>
+            <class name="HW19DeletePlaylist"/>
             <class name="Homework20"/>
-            <class name="Homework21"/>
+            <class name="HW21RenamePlaylist"/>
         </classes>
     </test>
 
