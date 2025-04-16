@@ -114,11 +114,11 @@ public class PlaylistTests extends BaseTest{
         }
     }
 
-    public String newPlaylistName = "Test Edited Playlist2";
+    public String newPlaylistName = "Test Edited Playlist3";
 
     @Test
     public void renamePlaylist()  {
-        String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist2.\"";
+        String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist3.\"";
 
         LoginPage loginPage = new LoginPage(driver);
         LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
