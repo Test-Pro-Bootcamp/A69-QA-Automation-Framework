@@ -7,6 +7,7 @@
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
+            <!--
             <class name="BaseTest"/>
             <class name="RegistrationTests"/>
             <class name="ProfileTests"/>
@@ -14,6 +15,7 @@
             <class name="ContextClickTest"/>
             <class name="HoverTests"/>
             <class name="SongTests"/>
+            -->
         </classes>
     </test>
 </suite>

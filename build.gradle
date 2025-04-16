@@ -20,5 +20,13 @@ dependencies {
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
+        /* We add this line to use Grid
+        //Now we can specify which browser to use during Test using following commend
+        //gradle clean test -Dbrowser=edge
+        // (edge can be substituted by other browser choices from pickBrowser() in BaseTest.java
+        //You can also use This Commend
+        //./gradlew clean test -Dbrowser=edge
+        clean - cleans cleans out previous results from previous tests   */
+        systemProperty "browser", System.getProperty("browser")
     }
 }
