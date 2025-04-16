@@ -14,6 +14,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+import java.net.URL;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -110,11 +111,11 @@ public class BaseTest {
 
                 case "grid-firefox":
                 capabilities.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL), toURL(), capabilities);
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
 
                 case "grid-safari":
                 capabilities.setCapability("browserName", "safari");
-                return driver = new RemoteWebDriver(URI.create(gridURL), toURL(), capabilities);
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
 
                 default:
                 WebDriverManager.chromedriver().setup();
