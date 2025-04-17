@@ -31,11 +31,21 @@ public class BaseTest {
     public WebDriverWait wait = null;
     public FluentWait waitFluent = null;
     public Actions actions = null;
+    private static final ThreadLocal<WebDriver> threadriver = new ThreadLocal<>();
 
     @BeforeSuite
     static void setupClass() {
         //now we will be using Grid
         //WebDriverManager.chromedriver().setup();
+    }
+
+    /* For Parallel Execution
+    Thread_Local of type ThreadLocal<WebDriver>. ThreadLocal is a mechanism that allows storing and
+    retrieving unique variable values for each thread. In this case, ThreadLocal<WebDriver> will be used
+    to store an instance of WebDriver associated with each thread during test execution.
+     */
+    public static WebDriver getDriver(){
+        return threadriver.get();
     }
 
     @DataProvider(name="IncorrectLoginData")
