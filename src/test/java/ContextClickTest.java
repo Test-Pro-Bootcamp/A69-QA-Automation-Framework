@@ -8,9 +8,9 @@ public class ContextClickTest extends BaseTest{
 
     @Test
     public void playSong(){
-        LoginPage loginPage = new LoginPage(driver);
-        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
-        SongsPage songsPage = new SongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(getDriver());
+        SongsPage songsPage = new SongsPage(getDriver());
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
 
@@ -22,8 +22,8 @@ public class ContextClickTest extends BaseTest{
 
 @Test
     public void clickHomePageLinksTests(){
-    LoginPage loginPage = new LoginPage(driver);
-    LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
+    LoginPage loginPage = new LoginPage(getDriver());
+    LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(getDriver());
 
     loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
 

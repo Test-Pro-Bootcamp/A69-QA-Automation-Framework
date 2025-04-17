@@ -8,8 +8,10 @@ import pages.LoginPage;
 public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailValidPassword() {
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        // we replaced (driver) To (getDriver()) everywhere
+        //LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
 
@@ -20,23 +22,23 @@ public class LoginTests extends BaseTest {
 
     @Test (dataProvider = "IncorrectLoginData", dataProviderClass = BaseTest.class)
     public void loginInvalidEmailValidPassword(String email, String password) {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         //Steps
         loginPage.login(email, password );
 
         //Expected Result
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
 
     }
 
     @Test
     public void loginValidEmailEmptyPassword() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "" );
 
         //Expected Result
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
 
     }
 }

@@ -12,10 +12,10 @@ public class PlaylistTests extends BaseTest{
     public void deletePlaylist() throws InterruptedException {
         String expectedAlert = "Deleted playlist \"" + playlistName + ".\"";
 
-        LoginPage loginPage = new LoginPage(driver);
-        SongsPage songsPage = new SongsPage(driver);
-        HomePage homePage = new HomePage(driver);
-        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        SongsPage songsPage = new SongsPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(getDriver());
 
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
@@ -42,11 +42,11 @@ public class PlaylistTests extends BaseTest{
     public void createPlaylist() throws InterruptedException {
         String expectedAlert = "Created playlist \"" + playlistName + ".\"";
 
-        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         //Steps
         if(!alreadyLoggedIn){
-            LoginPage loginPage = new LoginPage(driver);
+            LoginPage loginPage = new LoginPage(getDriver());
             //Steps
             loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
         }
@@ -69,10 +69,10 @@ public class PlaylistTests extends BaseTest{
     public void addSongToPlaylist() throws InterruptedException {
         String expectedAlert = "Added 1 song into \"" + playlistName + ".\"";
 
-        LoginPage loginPage = new LoginPage(driver);
-        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
-        SongsPage songsPage = new SongsPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(getDriver());
+        SongsPage songsPage = new SongsPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
@@ -96,9 +96,9 @@ public class PlaylistTests extends BaseTest{
 
     @Test
     public void countSongsInPlaylist() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver);
-        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
-        SongsPage songsPage = new SongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(getDriver());
+        SongsPage songsPage = new SongsPage(getDriver());
 
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
@@ -120,9 +120,9 @@ public class PlaylistTests extends BaseTest{
     public void renamePlaylist()  {
         String updatedPlaylistMsg = "Updated playlist \"Test Edited Playlist3.\"";
 
-        LoginPage loginPage = new LoginPage(driver);
-        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        LeftNavPanelPage leftNavPanelPage = new LeftNavPanelPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );

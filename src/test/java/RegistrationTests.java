@@ -12,16 +12,16 @@ import java.time.Duration;
 public class RegistrationTests extends BaseTest {
     @Test
     public void registrationNavigation(){
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         //Steps
         String url = "https://qa.koel.app/";
-        driver.get(url);
+        getDriver().get(url);
 
         loginPage.clickRegistrationLink();
 
         //Expected result Redirected to Registration Page
         String regUrl = "https://qa.koel.app/registration";
-        Assert.assertEquals(driver.getCurrentUrl(), regUrl);
+        Assert.assertEquals(getDriver().getCurrentUrl(), regUrl);
 
     }
 }

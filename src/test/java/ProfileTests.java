@@ -7,9 +7,9 @@ import pages.UserProfilePage;
 public class ProfileTests extends BaseTest{
     @Test
     public void changeProfileName() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver);
-        UserProfilePage userProfilePage = new UserProfilePage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        UserProfilePage userProfilePage = new UserProfilePage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         //Steps
         loginPage.login("oksana.chaklosh@testpro.io", "8qUBYosp" );
