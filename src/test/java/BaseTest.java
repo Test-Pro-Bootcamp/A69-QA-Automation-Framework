@@ -77,6 +77,7 @@ public class BaseTest {
 
         threadDriver.set(pickBrowser(System.getProperty("browser")));                  // for parallel testing
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));         // for parallel testing
+        getDriver().manage().window().maximize();                                       // for parallel testing
         //We are preparing to use Grid
         //driver = pickBrowser(System.getProperty("browser"));
 
@@ -176,7 +177,8 @@ public class BaseTest {
     }
 
     public void navigateToPage() {
-        driver.get(url);
+        getDriver().get(url);                       // for parallel testing
+        //driver.get(url);
     }
 
 
