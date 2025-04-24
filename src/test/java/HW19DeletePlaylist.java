@@ -3,7 +3,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework19 extends BaseTest {
+public class HW19DeletePlaylist extends BaseTest {
     @Test
     public void deletePlaylist() {
        String delPlaylistMsgDisplay = "Deleted playlist \"My Songs 2 .\"";

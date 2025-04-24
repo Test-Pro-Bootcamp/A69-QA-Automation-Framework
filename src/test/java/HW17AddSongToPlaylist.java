@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework17 {
+public class HW17AddSongToPlaylist {
     @Test
 
     public void addSongToPlaylist() throws InterruptedException {

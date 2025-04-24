@@ -6,18 +6,18 @@ import pages.LoginPage;
 
 public class LoginTest extends BaseTest {
     public void loginEmailPassword() {
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
+        getDriver().quit();
     }
 
     @Test
     public void loginSuccessTest() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.provideEmail ("artemisia.chalkiopoulou@testpro.io")
                 .providePassword("22002255")
                 .clickLoginBtn();
 
-        WebElement avatar = driver.findElement(By.cssSelector(".avatar"));
+        WebElement avatar = getDriver().findElement(By.cssSelector(".avatar"));
         Assert.assertTrue(avatar.isDisplayed());
         Thread.sleep(5000);
     }
