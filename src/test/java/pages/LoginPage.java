@@ -8,12 +8,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
-    //constructor
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
-    //locators with PageFactory
     @FindBy(css = "input[type='email']")
             WebElement emailField;
     @FindBy(css = "input[type='password']")
@@ -21,37 +19,29 @@ public class LoginPage extends BasePage {
     @FindBy(css = "button[type='submit']")
             WebElement clickSubmit;
 
-//    By emailField = By.cssSelector("input[type='email']");
-//    By passwordField = By.cssSelector("input[type='password']");
-//    By clickSubmit = By.cssSelector("button[type='submit']");
-
-    // Methods with PageFactory
     public LoginPage provideEmail(String email) {
-        wait.until(ExpectedConditions.elementToBeClickable(emailField));
-//        driver.findElement(emailField).click();
+        wait.until(ExpectedConditions.visibilityOf(emailField));
         emailField.click();
-//        driver.findElement(emailField).clear();
         emailField.clear();
-//        driver.findElement(emailField).sendKeys(email);
         emailField.sendKeys(email);
         return this;
     }
 
     public LoginPage providePassword(String pass) {
         wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-//        driver.findElement(passwordField).click();
         passwordField.click();
-//        driver.findElement(passwordField).clear();
         passwordField.clear();
-//        driver.findElement(passwordField).sendKeys(pass);
         passwordField.sendKeys(pass);
         return this;
     }
 
     public LoginPage clickLoginBtn() {
-//        driver.findElement(clickSubmit);
-                clickSubmit.click();
+        clickSubmit.click();
         return this;
+    }
+
+    public boolean isSubmitDisplayed() {
+        return clickSubmit.isDisplayed();
     }
 
     public LoginPage login(String email, String password) {
@@ -60,8 +50,4 @@ public class LoginPage extends BasePage {
         clickLoginBtn();
         return this;
     }
-
-
-
-
 }
