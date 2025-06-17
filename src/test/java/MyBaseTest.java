@@ -35,7 +35,7 @@
 //        password.sendKeys(pass);
 //    }
 //
-//    public void clickSubmit() {
+//    public void clickSubmitBtn() {
 //        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
 //        submit.click();
 //    }
@@ -43,7 +43,7 @@
 //    public void login(String email, String password) {
 //        provideEmail(email);
 //        providePassword(password);
-//        clickSubmit();
+//        clickSubmitBtn();
 //    }
 //
 //
