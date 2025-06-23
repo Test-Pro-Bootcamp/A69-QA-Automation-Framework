@@ -14,11 +14,19 @@ public class RegistrationPage extends BasePage {
 
     @FindBy(css = "input[type='email']")
     WebElement emailField;
-    @FindBy(css = "button[type='submit']")
+    @FindBy(css = "input[type='password']")
+    WebElement passwordField;
+    @FindBy(xpath = "//input[@id='button']")
     WebElement clickSubmit;
     @FindBy(css = "input[type='password']")
 
-    By errorMsg = By.cssSelector(".error");
+    By errorMsg = By.cssSelector(".messages");
+    By errorMsg2 = By.xpath("//div[@class='errors']");
+
+    public RegistrationPage navigateTo() {
+        driver.get("https://qa.koel.app/registration");
+        return this;
+    }
 
     public RegistrationPage enterEmail(String email) {
         wait.until(ExpectedConditions.visibilityOf(emailField));
@@ -27,7 +35,13 @@ public class RegistrationPage extends BasePage {
         emailField.sendKeys(email);
         return this;
     }
-
+    public RegistrationPage enterPassword(String pass) {
+        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
+        passwordField.click();
+        passwordField.clear();
+        passwordField.sendKeys(pass);
+        return this;
+    }
     public RegistrationPage clickSubmitBtn() {
         clickSubmit.click();
         return this;
@@ -35,5 +49,9 @@ public class RegistrationPage extends BasePage {
 
     public String getErrorMessage() {
         return driver.findElement(errorMsg).getText();
+    }
+
+    public String getErrorMessage2() {
+        return driver.findElement(errorMsg2).getText();
     }
 }
