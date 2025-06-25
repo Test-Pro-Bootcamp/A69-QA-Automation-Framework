@@ -76,7 +76,7 @@ public class ProfilePage extends BasePage {
         return driver.findElement(profile).getText();
     }
 
-    public String clearProfileName() {
+    public String deleteProfileName() {
         profileName.clear();
         return driver.findElement(profile).getText();
     }

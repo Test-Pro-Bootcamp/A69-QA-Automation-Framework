@@ -178,7 +178,7 @@ public class ProfileTests extends BaseTest {
         profilePage.openProfile();
         profilePage.typePassword("ArtemisCT@testpro2025");
         profilePage.typeEmail("artemisia.chalkiopoulou@testpro2025");
-        profilePage.clearProfileName();
+        profilePage.deleteProfileName();
         profilePage.saveProfile();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         String validationMessage = profilePage.getEmailValidationMessage();
