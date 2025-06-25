@@ -20,10 +20,14 @@ public class ProfilePage extends BasePage {
     WebElement currentPasswordInput;
     @FindBy(css = "#inputProfileName")
     WebElement profileName;
+    @FindBy(css = "#inputProfileEmail")
+    WebElement emailInput;
     @FindBy(css = ".btn-submit")
     WebElement saveBtn;
 
     By profile = By.cssSelector(".view-profile>span");
+    By successMsg = By.cssSelector(".success.show");
+    By errorMsg = By.cssSelector(".error.show");
 
     @FindBy(xpath = "//div[@data-testid='theme-card-violet']")
     WebElement themeVioletButton;
@@ -51,6 +55,12 @@ public class ProfilePage extends BasePage {
         currentPasswordInput.sendKeys(password);
     }
 
+    public void typeEmail(String email) {
+        emailInput.click();
+        emailInput.clear();
+        emailInput.sendKeys(email);
+    }
+
     public void typeNewProfileName(String name) {
         profileName.click();
         profileName.clear();
@@ -64,6 +74,21 @@ public class ProfilePage extends BasePage {
     public String getProfileName() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(profile));
         return driver.findElement(profile).getText();
+    }
+
+    public String clearProfileName() {
+        profileName.clear();
+        return driver.findElement(profile).getText();
+    }
+
+    public String successMessageIsDisplayed() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMsg));
+        return driver.findElement(successMsg).getText();
+    }
+
+    public String errorMessageIsDisplayed() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(errorMsg));
+        return driver.findElement(errorMsg).getText();
     }
 
     public void clickThemeVioletButton() {
@@ -90,4 +115,11 @@ public class ProfilePage extends BasePage {
         List<WebElement> elements = driver.findElements(locator);
         return !elements.isEmpty() && elements.get(0).isDisplayed();
     }
-}
+
+    public String getEmailValidationMessage() {
+        return emailInput.getAttribute("validationMessage");
+    }
+
+    }
+
+
