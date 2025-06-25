@@ -104,6 +104,7 @@ public class ProfileTests extends BaseTest {
         String validationMessage = profilePage.getEmailValidationMessage();
         Assert.assertTrue(validationMessage.contains("include a '.'"), "Expected browser validation message not found.");
     }
+
     @Test
     public void updateProfileWithInvalidEmail_PlusSignBeforeAtSymbolTest() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
@@ -117,6 +118,7 @@ public class ProfileTests extends BaseTest {
         String validationMessage = profilePage.getEmailValidationMessage();
         Assert.assertTrue(validationMessage.contains("plus"), "Expected browser validation message not found.");
     }
+
     @Test
     public void updateProfileWithInvalidEmail_AlreadyRegisteredEmailTest() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);

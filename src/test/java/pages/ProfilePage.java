@@ -120,6 +120,6 @@ public class ProfilePage extends BasePage {
         return emailInput.getAttribute("validationMessage");
     }
 
-    }
+}
 
 
